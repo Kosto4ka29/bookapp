@@ -4,6 +4,7 @@ class BooksList {
     this.filters = [];
 
     this.getElements();
+    this.initData();
     this.render();
     this.initActions();
   }
@@ -20,7 +21,7 @@ class BooksList {
     const templateSource = document.querySelector('#template-book').innerHTML;
     const template = Handlebars.compile(templateSource);
 
-    for (let book of dataSource.books) {
+    for (let book of this.data) {
       const rating = book.rating;
       const ratingBg = this.determineRatingBg(rating);
       const ratingWidth = rating * 10;
@@ -84,7 +85,7 @@ class BooksList {
   }
 
   filterBooks() {
-    for (let book of dataSource.books) {
+    for (let book of this.data) {
       let shouldBeHidden = false;
 
       for (let filter of this.filters) {
@@ -106,3 +107,4 @@ class BooksList {
 }
 
 const app = new BooksList();
+window.app = app;
